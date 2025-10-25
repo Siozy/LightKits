@@ -1,0 +1,10 @@
+name: "&7Тестовый набор"
+cooldown: -1
+visible: true
+enabled: true
+permission: "lightkits.kit.example"
+visuals:
+  slot: 10
+  material: STONE
+  loreLine: ''
+items: []

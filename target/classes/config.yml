@@ -1,0 +1,24 @@
+notEnableKits: []
+notDisableKits: []
+messages:
+  cooldowns:
+    days: "д."
+    hours: "ч."
+    minutes: "м."
+    seconds: "с."
+    notExists: "Отсутствует"
+    noPerm: "Недоступно"
+  playerNotExists: "Игрок не был найден!"
+  give: "Вы успешно выдали набор [name] игроку [player]!"
+  kitDisabled: "Кит недоступен для получения!"
+  noPermission: "У вас не хватает прав!"
+  kitNotExists: "Кит [id] не существует!"
+  kitExistsNow: "Кит [id] и так существует на данный момент!"
+  reset: "Вы успешно сбросили кд на кит [name] игроку [player]!"
+  remove: "Вы успешно удалили кит [id]!"
+  reload: "Вы успешно перезагрузили конфиг!"
+  create: "Вы успешно создали новый кит [id]!"
+  enableAll: "Вы успешно включили все киты!"
+  disableAll: "Вы успешно выключили все киты!"
+  claim: "Вы успешно взяли набор [name]!"
+  inCooldown: "Набор еще нельзя забрать! Подождите еще [time]"

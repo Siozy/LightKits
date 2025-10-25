@@ -1,0 +1,15 @@
+title: "&0"
+rows: 6
+items:
+  decorations: {}
+  clickable:
+    kitItem:
+      displayName: "[name]"
+      lore:
+        - "[cooldown] [loreLine]"
+      material: STONE
+    close:
+      displayName: ""
+      lore: []
+      material: STONE_BUTTON
+      slot: 9

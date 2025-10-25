@@ -1,0 +1,34 @@
+title: "&0"
+rows: 6
+items:
+  decorations: {}
+  clickable:
+    enableButton:
+      displayName: "Включить"
+      lore: []
+      material: LIME_DYE
+      slot: 10
+      _disableButton:
+        displayName: "Выключить"
+        lore: []
+        material: RED_DYE
+    claim:
+      displayName: "Взять набор"
+      lore: [ ]
+      material: LIME_DYE
+      slot: 10
+    copyFromKit:
+      displayName: "Скопировать набор в инвентарь"
+      lore: []
+      material: EMERALD
+      slot: 11
+    copyToKit:
+      displayName: "Скопировать инвентарь из набора"
+      lore: []
+      material: REDSTONE
+      slot: 12
+    back:
+      displayName: ""
+      lore: []
+      material: STONE_BUTTON
+      slot: 9

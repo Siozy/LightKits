@@ -1,0 +1,33 @@
+name: LightKits
+version: '${project.version}'
+main: com.progiple.satellitedev.lightkits.LightKits
+api-version: '1.16'
+depend: [LunaSpring]
+authors: [ProGiple]
+commands:
+  lightkits:
+    aliases:
+      - lightkit
+      - kit
+      - kits
+permissions:
+  lightkits.create:
+    default: op
+  lightkits.remove:
+    default: op
+  lightkits.reset:
+    default: op
+  lightkits.reload:
+    default: op
+  lightkits.switch.enable:
+    default: op
+  lightkits.switch.disable:
+    default: op
+  lightkits.switch.*:
+    default: op
+  lightkits.copy:
+    default: op
+  lightkits.kit.*:
+    default: op
+  lightkits.bypass:
+    default: false
