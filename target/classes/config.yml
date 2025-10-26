@@ -1,5 +1,6 @@
 notEnableKits: []
 notDisableKits: []
+editor_menu_title: "Редактор [name] ([id])"
 messages:
   cooldowns:
     days: "д."
@@ -22,3 +23,4 @@ messages:
   disableAll: "Вы успешно выключили все киты!"
   claim: "Вы успешно взяли набор [name]!"
   inCooldown: "Набор еще нельзя забрать! Подождите еще [time]"
+  saveKit: "Вы успешно сохранили предметы для набора [name]!"

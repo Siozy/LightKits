@@ -18,7 +18,7 @@ public class LoadKitToInventoryButton extends Item {
         if (!e.getClick().isShiftClick()) return this;
 
         Player player = (Player) e.getWhoClicked();
-        kit.downloadItems(player);
+        kit.downloadItems(player.getInventory());
         return this;
     }
 }

@@ -1,5 +1,5 @@
 name: LightKits
-version: '1.0.2.1'
+version: '1.0.3'
 main: com.progiple.satellitedev.lightkits.LightKits
 api-version: '1.16'
 depend: [LunaSpring]
