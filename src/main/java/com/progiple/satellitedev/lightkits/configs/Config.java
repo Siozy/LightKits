@@ -22,6 +22,10 @@ public class Config {
         Tools.reloadLiterators();
     }
 
+    public String getString(String path, String defaultArg) {
+        return config.self().getString(path, defaultArg);
+    }
+
     public List<String> getList(String path) {
         return config.getStringList(path);
     }

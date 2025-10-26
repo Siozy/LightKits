@@ -2,6 +2,7 @@ package com.progiple.satellitedev.lightkits.menus.main.buttons;
 
 import com.progiple.satellitedev.lightkits.kits.Kit;
 import com.progiple.satellitedev.lightkits.menus.InfoItem;
+import com.progiple.satellitedev.lightkits.menus.itemEditor.EditItemsMenu;
 import com.progiple.satellitedev.lightkits.menus.view.ViewMenu;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -22,7 +23,20 @@ public class KitItem extends InfoItem {
     public Item onClick(InventoryClickEvent e) {
         e.setCancelled(true);
 
-        ViewMenu viewMenu = new ViewMenu((Player) e.getWhoClicked(), this.kit);
+        Player player = (Player) e.getWhoClicked();
+        if (e.getClick().isRightClick()) {
+            EditItemsMenu editItemsMenu = MenuManager.getActiveMenus(EditItemsMenu.class, true)
+                    .filter(m -> m.getKit() == kit)
+                    .findFirst()
+                    .orElse(null);
+            if (editItemsMenu == null) editItemsMenu = new EditItemsMenu(player, kit);
+            else editItemsMenu = (EditItemsMenu) editItemsMenu.copy(player);
+
+            MenuManager.openInventory(editItemsMenu);
+            return this;
+        }
+
+        ViewMenu viewMenu = new ViewMenu(player, this.kit);
         MenuManager.openInventory(viewMenu);
         return this;
     }

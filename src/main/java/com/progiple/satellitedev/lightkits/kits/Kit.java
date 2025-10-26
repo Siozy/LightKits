@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.novasparkle.lunaspring.API.configuration.Configuration;
@@ -91,7 +92,7 @@ public class Kit {
         this.config.save();
     }
 
-    public void uploadItems(PlayerInventory inventory) {
+    public void uploadItems(Inventory inventory) {
         int size = inventory.getSize();
         for (int i = 0; i < this.items.length; i++) {
             ItemStack itemStack = i >= size ? null : inventory.getItem(i);
@@ -102,10 +103,10 @@ public class Kit {
         this.config.save();
     }
 
-    public void downloadItems(Player player) {
-        int size = player.getInventory().getSize();
+    public void downloadItems(Inventory inventory) {
+        int size = inventory.getSize();
         for (int i = 0; i < Math.min(size, this.items.length); i++) {
-            player.getInventory().setItem(i, this.items[i]);
+            inventory.setItem(i, this.items[i]);
         }
     }
 
