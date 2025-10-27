@@ -33,7 +33,7 @@ public class ViewMenu extends AMenu implements IKitMenu {
         super(player);
         this.kit = kit;
         this.config = new IConfig(LightKits.getINSTANCE().getDataFolder(), "menus/view");
-        this.initialize(ColorManager.color(this.config.getString("title")),
+        this.initialize(ColorManager.color(this.config.getString("title").replace("[name]", this.kit.name),
                 (byte) (this.config.getInt("rows") * 9),
                 this.config.getSection("items.decorations"),
                 true);
