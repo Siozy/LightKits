@@ -1,5 +1,6 @@
 package com.progiple.satellitedev.lightkits.menus;
 
+import com.progiple.satellitedev.lightkits.configs.Config;
 import com.progiple.satellitedev.lightkits.kits.Kit;
 import com.progiple.satellitedev.lightkits.managers.Tools;
 import org.bukkit.configuration.ConfigurationSection;
@@ -37,7 +38,8 @@ public abstract class InfoItem extends Item {
         this.setLore(new ArrayList<>(this.getDefaultLore()),
                 "name-%-" + kit.name(),
                 "cooldown-%-" + Tools.timeFormer(diff, hasPermission),
-                "enabled-%-" + (kit.enabled()),
+                "claimCooldown-%-" + Tools.timeFormer(kit.cooldown() * 1000),
+                "enabled-%-" + (kit.enabled() ? Config.getString("messages.switch.enabled", "Включено") : Config.getString("messages.switch.disabled", "Выключено")),
                 "loreLine-%-" + kit.visuals().loreLine());
         this.replaceLore(l -> Utils.setPlaceholders(player, l));
 

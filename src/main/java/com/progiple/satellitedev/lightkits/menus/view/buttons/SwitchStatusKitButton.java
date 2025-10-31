@@ -23,6 +23,7 @@ public class SwitchStatusKitButton extends InfoItem {
     public Item onClick(InventoryClickEvent e) {
         this.kit.switchStatus(!kit.enabled());
         this.loadStatus();
+        this.tick();
         return this;
     }
 

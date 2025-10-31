@@ -26,6 +26,8 @@ public class Config {
         return config.self().getString(path, defaultArg);
     }
 
+    public List<Integer> getIntList(String path) { return config.getIntList(path); }
+
     public List<String> getList(String path) {
         return config.getStringList(path);
     }

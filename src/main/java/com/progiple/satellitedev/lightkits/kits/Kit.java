@@ -41,8 +41,8 @@ public class Kit {
         this.name = "Default Name";
         this.cooldown = -1;
         this.visible = false;
-        this.visuals = new KitVisuals(-1, Material.AIR, "Example Lore Line");
-        this.permission = "lightkits.kit.*";
+        this.visuals = new KitVisuals(-1, Material.AIR, "Example Lore Line", "");
+        this.permission = "lightkits.kit." + this.name;
 
         this.config.setString("name", this.name);
         this.config.setLong("cooldown", this.cooldown);
@@ -68,7 +68,7 @@ public class Kit {
         ConfigurationSection visualSection = this.config.getSection("visuals");
         this.visuals = new KitVisuals(visualSection.getInt("slot"),
                 Utils.getMaterial(visualSection.getString("material")),
-                ColorManager.color(visualSection.getString("loreLine")));
+                ColorManager.color(visualSection.getString("loreLine")), visualSection.getString("baseHead"));
         this.visible = this.visuals.slot() >= 0 &&
                             this.visuals.material() != null &&
                                     !this.visuals.material().isAir() &&
@@ -85,7 +85,7 @@ public class Kit {
     public void switchStatus(boolean status) {
         String id = status ? "Disable" : "Enable";
         List<String> list = Config.getList("not" + id + "Kits");
-        if (list.contains(this.id)) return;
+        if (list.contains(this.id)) { return; }
 
         this.enabled = status;
         this.config.setBoolean("enabled", this.enabled);

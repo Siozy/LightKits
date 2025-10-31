@@ -11,6 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
 import org.novasparkle.lunaspring.API.menus.MenuManager;
 import org.novasparkle.lunaspring.API.menus.items.Item;
+import org.novasparkle.lunaspring.API.util.service.managers.NBTManager;
 
 public class KitItem extends InfoItem {
     public KitItem(@NotNull ConfigurationSection section, Kit kit) {
@@ -44,6 +45,9 @@ public class KitItem extends InfoItem {
     @Override
     public KitItem setMaterial(@NotNull Material material) {
         super.setMaterial(material);
+        if (material.equals(Material.PLAYER_HEAD)) {
+            NBTManager.base64head(this.getItemStack(), kit.visuals().baseHead());
+        }
         return this;
     }
 }
