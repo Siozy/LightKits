@@ -5,6 +5,7 @@ enabled: true
 permission: "lightkits.kit.example"
 visuals:
   slot: 10
+  page: 1
   material: STONE
   loreLine: ''
 items: []

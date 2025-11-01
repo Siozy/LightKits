@@ -4,6 +4,7 @@ import com.progiple.satellitedev.lightkits.LightKits;
 import com.progiple.satellitedev.lightkits.kits.Kit;
 import com.progiple.satellitedev.lightkits.managers.KitManager;
 import com.progiple.satellitedev.lightkits.menus.IKitMenu;
+import com.progiple.satellitedev.lightkits.menus.InfoItem;
 import com.progiple.satellitedev.lightkits.menus.Updater;
 import com.progiple.satellitedev.lightkits.menus.main.buttons.KitItem;
 import org.bukkit.configuration.ConfigurationSection;
@@ -15,7 +16,9 @@ import org.jetbrains.annotations.NotNull;
 import org.novasparkle.lunaspring.API.configuration.IConfig;
 import org.novasparkle.lunaspring.API.menus.AMenu;
 import org.novasparkle.lunaspring.API.menus.MoveIgnored;
+import org.novasparkle.lunaspring.API.menus.PageMenu;
 import org.novasparkle.lunaspring.API.menus.items.Item;
+import org.novasparkle.lunaspring.API.menus.items.SwitchItem;
 import org.novasparkle.lunaspring.API.util.service.managers.ColorManager;
 
 import java.util.stream.Collectors;
@@ -24,14 +27,24 @@ import java.util.stream.Collectors;
 public class MainMenu extends AMenu {
     private final IConfig config;
     private final Updater updater;
-    public MainMenu(@NotNull Player player) {
+    private final int page;
+    public MainMenu(@NotNull Player player, int page) {
         super(player);
+        this.page = page;
         this.config = new IConfig(LightKits.getINSTANCE().getDataFolder(), "menus/main");
-        this.initialize(ColorManager.color(this.config.getString("title")),
+
+        this.initialize(
+                ColorManager.color(this.config.getString("title")
+                        .replace("[page]", String.valueOf(this.page))
+                        .replace("[maxPage]", String.valueOf(KitManager.maxPage()))),
                 (byte) (this.config.getInt("rows") * 9),
                 this.config.getSection("items.decorations"),
                 true);
         this.updater = new Updater(this);
+    }
+
+    public MainMenu(@NotNull Player player) {
+        this(player, 1);
     }
 
     @Override
@@ -52,11 +65,30 @@ public class MainMenu extends AMenu {
         ConfigurationSection itemSection = section.getConfigurationSection("kitItem");
         if (itemSection != null) this.addItems(KitManager.kits()
                 .stream()
-                .filter(Kit::visible)
+                .filter(k -> k.visible() && k.visuals().page() == this.page)
                 .map(k -> new KitItem(itemSection, k).setMaterial(k.visuals().material()))
                 .collect(Collectors.toSet()), false);
-        this.insertAll();
 
+        ConfigurationSection nextSection = section.getConfigurationSection("nextPage");
+        if (nextSection != null && this.page < KitManager.maxPage()) {
+            this.addItems(false, new SwitchItem(
+                    nextSection,
+                    nextSection.getInt("slot"),
+                    p -> new MainMenu(p, this.page + 1)));
+        }
+
+        ConfigurationSection prevSection = section.getConfigurationSection("prevPage");
+        if (prevSection != null && this.page > 1 && KitManager
+                .kits()
+                .stream()
+                .anyMatch(k -> k.visible() && k.visuals().page() < this.page)) {
+            this.addItems(false, new SwitchItem(
+                    prevSection,
+                    prevSection.getInt("slot"),
+                    p -> new MainMenu(p, this.page - 1)));
+        }
+
+        this.insertAll();
         this.updater.runTaskLaterAsynchronously(LightKits.getINSTANCE(), 2L);
     }
 

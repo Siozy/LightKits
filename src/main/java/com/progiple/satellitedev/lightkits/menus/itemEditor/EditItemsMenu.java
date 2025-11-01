@@ -49,7 +49,7 @@ public class EditItemsMenu extends AMenu implements IKitMenu {
         Config.sendMessage(player, "saveKit", "id-%-" + kit.id(), "name-%-" + kit.name());
 
         Bukkit.getScheduler().runTaskLater(LightKits.getINSTANCE(), () -> {
-            MenuManager.openInventory(new MainMenu(player));
+            MenuManager.openInventory(new MainMenu(player, this.kit.visuals().page()));
         }, 3L);
     }
 }

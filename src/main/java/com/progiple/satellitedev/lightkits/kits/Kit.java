@@ -41,7 +41,7 @@ public class Kit {
         this.name = "Default Name";
         this.cooldown = -1;
         this.visible = false;
-        this.visuals = new KitVisuals(-1, Material.AIR, "Example Lore Line", "");
+        this.visuals = new KitVisuals(-1, 0, Material.AIR, "Example Lore Line", "");
         this.permission = "lightkits.kit." + this.name;
 
         this.config.setString("name", this.name);
@@ -51,6 +51,7 @@ public class Kit {
 
         String visualPath = "visuals.";
         this.config.setInt(visualPath + "slot", this.visuals.slot());
+        this.config.setInt(visualPath + "page", this.visuals.page());
         this.config.setString(visualPath + "material", this.visuals.material().name());
         this.config.setString(visualPath + "loreLine", this.visuals.loreLine());
 
@@ -66,13 +67,17 @@ public class Kit {
         this.cooldown = this.config.getLong("cooldown");
 
         ConfigurationSection visualSection = this.config.getSection("visuals");
-        this.visuals = new KitVisuals(visualSection.getInt("slot"),
+        this.visuals = new KitVisuals(
+                visualSection.getInt("slot"),
+                visualSection.getInt("page"),
                 Utils.getMaterial(visualSection.getString("material")),
-                ColorManager.color(visualSection.getString("loreLine")), visualSection.getString("baseHead"));
-        this.visible = this.visuals.slot() >= 0 &&
-                            this.visuals.material() != null &&
-                                    !this.visuals.material().isAir() &&
-                                        this.config.getBoolean("visible");
+                ColorManager.color(visualSection.getString("loreLine")),
+                visualSection.getString("baseHead"));
+        this.visible = this.visuals.page() > 0 &&
+                            this.visuals.slot() >= 0 &&
+                                this.visuals.material() != null &&
+                                        !this.visuals.material().isAir() &&
+                                            this.config.getBoolean("visible");
         this.permission = this.config.getString("permission");
         this.enabled = this.config.getBoolean("enabled");
 

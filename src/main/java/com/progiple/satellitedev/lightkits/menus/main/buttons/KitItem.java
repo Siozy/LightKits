@@ -25,7 +25,7 @@ public class KitItem extends InfoItem {
         e.setCancelled(true);
 
         Player player = (Player) e.getWhoClicked();
-        if (e.getClick().isRightClick()) {
+        if (e.getClick().isRightClick() && player.hasPermission("lightkits.copy")) {
             EditItemsMenu editItemsMenu = MenuManager.getActiveMenus(EditItemsMenu.class, true)
                     .filter(m -> m.getKit() == kit)
                     .findFirst()

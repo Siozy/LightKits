@@ -3,6 +3,16 @@ rows: 6
 items:
   decorations: {}
   clickable:
+    nextPage:
+      displayName: ""
+      lore: [ ]
+      material: STONE_BUTTON
+      slot: 0
+    prevPage:
+      displayName: ""
+      lore: [ ]
+      material: STONE_BUTTON
+      slot: 1
     kitItem:
       displayName: "[name]"
       lore:

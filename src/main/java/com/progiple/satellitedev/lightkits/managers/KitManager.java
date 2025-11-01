@@ -13,15 +13,25 @@ import java.util.Set;
 
 @UtilityClass @Accessors(fluent = true)
 public class KitManager {
-    @Getter
-    private final Set<Kit> kits = new HashSet<>();
+    @Getter private final Set<Kit> kits = new HashSet<>();
+    @Getter private int maxPage = 0;
 
     public Kit getKit(String id) {
         return Utils.find(kits, k -> k.id().equals(id)).orElse(null);
     }
 
     public void register(Kit kit) {
+        if (kit.visuals().page() > maxPage) maxPage = kit.visuals().page();
         kits.add(kit);
+    }
+
+    public void unregister(Kit kit) {
+        kits.remove(kit);
+        maxPage = kits
+                .stream()
+                .map(k -> k.visuals().page())
+                .max(Integer::compareTo)
+                .orElse(0);
     }
 
     public void load() {
@@ -34,7 +44,8 @@ public class KitManager {
         if (files == null) return;
 
         for (File file : files) {
-            register(new Kit(file));
+            Kit kit = new Kit(file);
+            register(kit);
         }
     }
 
@@ -50,6 +61,7 @@ public class KitManager {
         Kit kit = getKit(id);
         if (kit == null) return false;
 
-        return kits.remove(kit) && kit.remove();
+        unregister(kit);
+        return kit.remove();
     }
 }

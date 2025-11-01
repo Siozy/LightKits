@@ -1,9 +1,6 @@
 notEnableKits: []
 notDisableKits: []
 editor_menu_title: "Редактор [name] ([id])"
-page_order:
-  - mainPage1
-  - mainPage2
 messages:
   cooldowns:
     days: "д."
